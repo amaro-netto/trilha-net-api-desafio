@@ -1,58 +1,92 @@
 # DIO - Trilha .NET - API e Entity Framework
-www.dio.me
+# Sistema Agendador de Tarefas
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de API e Entity Framework, da trilha .NET da DIO.
+![Badge .NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![Badge C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 
-## Contexto
-Você precisa construir um sistema gerenciador de tarefas, onde você poderá cadastrar uma lista de tarefas que permitirá organizar melhor a sua rotina.
+## 📋 Descrição do Projeto
 
-Essa lista de tarefas precisa ter um CRUD, ou seja, deverá permitir a você obter os registros, criar, salvar e deletar esses registros.
+Este projeto foi desenvolvido como parte do desafio final do módulo de API e Entity Framework da trilha .NET da **Digital Innovation One (DIO)**.
 
-A sua aplicação deverá ser do tipo Web API ou MVC, fique a vontade para implementar a solução que achar mais adequado.
+O objetivo foi construir um sistema gerenciador de tarefas onde é possível cadastrar, listar, atualizar e deletar tarefas. A persistência dos dados é feita através do **Entity Framework Core**.
 
-A sua classe principal, a classe de tarefa, deve ser a seguinte:
+Embora o desafio original sugerisse o uso do SQL Server, este projeto foi configurado para utilizar **SQLite**, permitindo que ele seja executado facilmente em qualquer ambiente (incluindo GitHub Codespaces) sem a necessidade de instalação de um servidor de banco de dados complexo.
 
-![Diagrama da classe Tarefa](diagrama.png)
+## ⚙️ Funcionalidades
 
-Não se esqueça de gerar a sua migration para atualização no banco de dados.
+- **CRUD Completo**:
+  - Criar nova tarefa.
+  - Listar todas as tarefas.
+  - Buscar tarefa por ID.
+  - Atualizar tarefa existente.
+  - Deletar tarefa.
+- **Filtros Personalizados**:
+  - Buscar tarefas por **Título**.
+  - Buscar tarefas por **Data**.
+  - Buscar tarefas por **Status** (Pendente/Finalizado).
 
-## Métodos esperados
-É esperado que você crie o seus métodos conforme a seguir:
+## 🛠️ Tecnologias Utilizadas
 
+- **.NET 6**
+- **C#**
+- **Entity Framework Core**
+- **SQLite** (Banco de dados relacional portátil)
+- **Swagger** (Documentação da API)
 
-**Swagger**
+## 🚀 Como Executar o Projeto
 
+Para rodar este projeto na sua máquina local ou no GitHub Codespaces, siga os passos abaixo:
 
-![Métodos Swagger](swagger.png)
+### Pré-requisitos
+- .NET SDK 6.0 instalado.
 
+### Passos
 
-**Endpoints**
+1. **Clone o repositório**:
+   ```bash
+   git clone [https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git](https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git)
+   ```
 
+2. **Entre na pasta do projeto**:
+   ```bash
+   cd trilha-net-api-desafio
+   ```
 
-| Verbo  | Endpoint                | Parâmetro | Body          |
-|--------|-------------------------|-----------|---------------|
-| GET    | /Tarefa/{id}            | id        | N/A           |
-| PUT    | /Tarefa/{id}            | id        | Schema Tarefa |
-| DELETE | /Tarefa/{id}            | id        | N/A           |
-| GET    | /Tarefa/ObterTodos      | N/A       | N/A           |
-| GET    | /Tarefa/ObterPorTitulo  | titulo    | N/A           |
-| GET    | /Tarefa/ObterPorData    | data      | N/A           |
-| GET    | /Tarefa/ObterPorStatus  | status    | N/A           |
-| POST   | /Tarefa                 | N/A       | Schema Tarefa |
+3. **Restaure as dependências**:
+   ```bash
+   dotnet restore
+   ```
 
-Esse é o schema (model) de Tarefa, utilizado para passar para os métodos que exigirem
+4. **Atualize o banco de dados (Aplicar Migrations)**:
+   Como o projeto usa SQLite, este comando criará o arquivo do banco localmente.
+   ```bash
+   dotnet ef database update
+   ```
+
+5. **Execute o projeto**:
+   ```bash
+   dotnet run
+   ```
+
+6. **Acesse a documentação (Swagger)**:
+   Abra o navegador e acesse a porta local indicada no terminal (geralmente `5000` ou `7000`) com o caminho `/swagger`.
+   Exemplo: `http://localhost:5181/swagger`
+
+## 🧪 Exemplo de JSON para Teste
+
+Ao criar uma tarefa (POST), utilize o seguinte formato:
 
 ```json
 {
-  "id": 0,
-  "titulo": "string",
-  "descricao": "string",
-  "data": "2022-06-08T01:31:07.056Z",
+  "titulo": "Finalizar desafio da DIO",
+  "descricao": "Implementar os métodos do Controller e configurar o EF",
+  "data": "2024-12-30T10:00:00",
   "status": "Pendente"
 }
 ```
 
+## 📝 Estrutura do Projeto
 
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+- **Controllers**: Contém a lógica dos endpoints da API (`TarefaController`).
+- **Models**: Contém as classes que representam as tabelas do banco (`Tarefa`) e enums (`EnumStatusTarefa`).
+- **Context**: Configuração do contexto do banco de dados (`OrganizadorContext`).
